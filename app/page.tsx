@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main className="relative flex-1 flex flex-col items-center overflow-hidden">
@@ -26,7 +28,7 @@ export default function Home() {
         {/* Games grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <GameCard
-            emoji="🎬"
+            image="/whatsnext-preview.png"
             title="What's Next?"
             description="Watch a clip, predict what happens in the last 10 seconds, then see which team nailed it."
             href="https://whatsnext.davidssoccertraining.com"
@@ -43,13 +45,13 @@ export default function Home() {
 }
 
 function GameCard({
-  emoji,
+  image,
   title,
   description,
   href,
   color,
 }: {
-  emoji: string;
+  image: string;
   title: string;
   description: string;
   href: string;
@@ -60,18 +62,21 @@ function GameCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="glass glass-hover bounce-in rounded-2xl p-6 flex flex-col gap-4 transition-transform hover:-translate-y-1"
+      className="glass glass-hover bounce-in rounded-2xl overflow-hidden flex flex-col transition-transform hover:-translate-y-1"
       style={{ textDecoration: "none" }}
     >
-      <div
-        className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
-        style={{ background: `${color}22`, border: `1px solid ${color}55` }}
-      >
-        {emoji}
+      <div className="relative w-full aspect-video overflow-hidden">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-cover object-top"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
       </div>
-      <div>
+      <div className="p-5 flex flex-col gap-2">
         <h2
-          className="text-2xl font-bold mb-1"
+          className="text-2xl font-bold"
           style={{ fontFamily: "var(--font-fredoka)", color }}
         >
           {title}
@@ -79,13 +84,13 @@ function GameCard({
         <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
           {description}
         </p>
+        <span
+          className="mt-2 text-sm font-semibold"
+          style={{ fontFamily: "var(--font-fredoka)", color: "rgba(255,255,255,0.35)" }}
+        >
+          Play now →
+        </span>
       </div>
-      <span
-        className="mt-auto text-sm font-semibold"
-        style={{ fontFamily: "var(--font-fredoka)", color: "rgba(255,255,255,0.35)" }}
-      >
-        Play now →
-      </span>
     </a>
   );
 }
