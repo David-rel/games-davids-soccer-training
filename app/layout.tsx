@@ -14,9 +14,57 @@ const nunito = Nunito({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const SITE_URL = "https://games.davidssoccertraining.com";
+
 export const metadata: Metadata = {
-  title: "David's Soccer Training | Games",
-  description: "Fun interactive games for players, families, and fans.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "David's Soccer Training | Games",
+    template: "%s | David's Soccer Training Games",
+  },
+  description:
+    "Fun interactive games for soccer players, families, and fans. Built by David's Soccer Training.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "David's Soccer Training Games",
+    title: "David's Soccer Training | Games",
+    description:
+      "Fun interactive games for soccer players, families, and fans.",
+    images: [
+      {
+        url: "/icon.png",
+        width: 1080,
+        height: 1080,
+        alt: "David's Soccer Training Games",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "David's Soccer Training | Games",
+    description:
+      "Fun interactive games for soccer players, families, and fans.",
+    images: ["/icon.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
